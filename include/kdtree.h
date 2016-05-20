@@ -6,6 +6,8 @@
 #include <iostream>
 #include <cassert>
 
+#include "utilities.h"
+
 namespace kdtree
 {
 
@@ -89,6 +91,14 @@ namespace kdtree
        
        size_t splitTree(std::vector<size_t>::iterator start, std::vector<size_t>::iterator end);
        std::pair<axis_t,std::vector<size_t>::iterator> find_split(std::vector<size_t>::iterator start, std::vector<size_t>::iterator end);
+       
+    private:
+    
+      template<class R>
+      friend std::ostream & operator<<(std::ostream &os, const kdTree<R>& n);
+      
+      template<class R>
+      friend std::istream & operator>>(std::istream &is, kdTree<R>& n);
   };
 }; //namespace kdtree
 

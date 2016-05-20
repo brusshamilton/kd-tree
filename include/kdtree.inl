@@ -111,5 +111,41 @@ namespace kdtree
     return is;
   }
   
+  template<class T>
+  std::ostream & operator<<(std::ostream& os, const kdtree::kdTree<T> &tree)
+  {
+    kdtree::writeValuesToCSV(os, tree.values());
+  
+    os << std::endl;
+  
+    os << tree.root() << std::endl;
+    os << std::endl;
+  
+    for (const kdtree::node& n : tree.tree())
+    {
+      os << n << std::endl;
+    }
+    return os;
+  }
+  
+  template<class T>
+  std::istream & operator>>(std::istream& is, kdtree::kdTree<T> &tree)
+  {
+    tree.values_ = kdtree::loadValuesFromCSV<T>(is);
+  
+    tree.N_ = tree.values_.size();
+    assert(tree.N_ > 0);
+    tree.K_ = tree.values_[0].size();
+  
+    is >> tree.root_;
+
+    tree.tree_.resize(tree.N_);
+    for (kdtree::node& n : tree.tree_)
+    {
+      is >> n;
+    }
+
+    return is;
+  }
 };
 

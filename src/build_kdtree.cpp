@@ -4,22 +4,6 @@
 #include "kdtree.h"
 #include "utilities.h"
 
-template<class T>
-void writeTree(std::ostream& os, const kdtree::kdTree<T> &tree)
-{
-  kdtree::writeValuesToCSV(os, tree.values());
-  
-  os << std::endl;
-  
-  os << tree.root() << std::endl;
-  os << std::endl;
-  
-  for (const kdtree::node& n : tree.tree())
-  {
-    os << n << std::endl;
-  }
-}
-
 int main(int argc, const char* argv[])
 {
   std::string filename = "sample_data.csv";
@@ -40,7 +24,7 @@ int main(int argc, const char* argv[])
     return -1;
   }
   
-  writeTree<double>(os, tree);
+  os << tree;
     
   return 0;
 }
