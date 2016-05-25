@@ -5,9 +5,10 @@ project(kdtree CXX)
 
 set(VERSION_MAJOR 0)
 set(VERSION_MINOR 0)
-set(VERSION_PATCH 0)
+set(VERSION_PATCH 2)
 
-add_compile_options(--std=c++11 -Wall -ggdb) # or set(CMAKE_CXX_FLAGS, ${CMAKE_CXX_FLAGS} "--std=c++11")
+add_compile_options(--std=c++11 -O3 -Wall)
+#add_compile_options(--std=c++11 -O0 -Wall -ggdb -DDEBUG)
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 

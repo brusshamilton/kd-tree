@@ -8,10 +8,19 @@
 namespace kdtree
 {
 
-  typedef size_t axis_t;
-  const axis_t INVALID_AXIS = SIZE_MAX;
-  const size_t INVALID_IDX = SIZE_MAX;
+  typedef size_t axis_t; //!< Axis indexing type
+  
+  const axis_t INVALID_AXIS = SIZE_MAX; //!< Sentinel value for invalid axis
+  const size_t INVALID_IDX = SIZE_MAX;  //!< Sentinel value for invalid index
 
+/** \addtogroup VectorIO Array of Vector I/O
+ *  @{
+ */
+
+
+  /**
+   * Utility function to read an array of points from a CSV formatted input stream
+   */
   template<class T>
   std::vector<std::vector<T>> loadValuesFromCSV(std::istream &is)
   {
@@ -50,6 +59,9 @@ namespace kdtree
     return retval;
   }
 
+  /**
+   * Utility function to write an array of points to a CSV formatted output stream
+   */
   template<class T>
   void writeValuesToCSV(std::ostream &os, const std::vector<std::vector<T>>& values)
   {
@@ -63,7 +75,15 @@ namespace kdtree
       os << std::endl;
     }
   }
-  
+ 
+/** @}*/
+
+/** \addtogroup VectorMath Vector Math calculations
+ *  @{
+ */
+  /**
+   * Calculate the norm of the difference between two vectors
+   */
   template<class T>
   T normOfDifference(const std::vector<T>& a, const std::vector<T>& b, size_t L = 2)
   {
@@ -79,6 +99,14 @@ namespace kdtree
     return distL;
   }
   
+  /**
+   * Find the closest point to the target that still lies within the bounds
+   *
+   * \param[in]  target Target point
+   * \param[in]  min    The lower corner of the hypercube defining the bounds
+   * \param[in]  max    The upper corner of the hypercube defining the bounds
+   * \param[out] result The output point
+   */
   template<class T>
   void getClosestPointInBounds(const std::vector<T>& target, const std::vector<T>& min, const std::vector<T>& max, std::vector<T>& result)
   {
@@ -88,7 +116,7 @@ namespace kdtree
       result[k] = std::max(std::min(target[k],max[k]),min[k]); //saturate to boundaries
     }
   }
-  
+/** @}*/
 };
 
 #endif

@@ -50,7 +50,10 @@ int main(int argc, const char* argv[])
        std::cerr << "Error opening file: " << filename << std::endl;
        return -1;
      }
-     
+
+#ifdef DEBUG     
+     for (int i = 0; i < 10000; i++)
+#endif
      for (const auto& q : query)
      {
        size_t min_idx = tree.getNearest(q);

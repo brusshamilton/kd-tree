@@ -39,6 +39,9 @@ int main(int argc, const char* argv[])
        return -1;
      }
      
+#ifdef DEBUG     
+     for (int i = 0; i < 10000; i++)
+#endif
      for (const auto& q : query)
      {
        double mindist2 = std::numeric_limits<double>::infinity();

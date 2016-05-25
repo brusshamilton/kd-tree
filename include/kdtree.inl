@@ -8,15 +8,23 @@ namespace kdtree
 
   namespace
   {
+    /*
+     * Function-object for indirect comparison of the kth axis two vectors in an array of vectors
+     *
+     * \warning The array of vectors must not go out of scope during the lifetime of this object
+     */
     template<class T>
     class indirect_compare_kth
     {
     private:
-      const std::vector<std::vector<T>> &values_;
-      axis_t k_;
+      const std::vector<std::vector<T>> &values_; //!< Reference to the array of vectors
+      axis_t k_;                                  //!< Axis to compare the vectors
     public:
       indirect_compare_kth(const std::vector<std::vector<T>> &values, axis_t k) : values_(values), k_(k) {}
-       
+      
+      /*
+       * Compares the kth element of the vector in the a^th row of the array to the kth element of the vector in the b^th row of the array
+       */
       bool operator()(size_t a, size_t b) 
       { 
         assert(values_[a].size() == values_[b].size());
@@ -174,6 +182,10 @@ namespace kdtree
       {
         getNearestBounded(target, new_min, new_max, tree_[root].right(), closest_norm, closest);
       }
+#ifdef PRINT_DEBUG
+      else
+        std::cerr << "Pruning subtree " << root << std::endl;
+#endif
     }
   }
   
