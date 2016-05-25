@@ -10,18 +10,12 @@
 
 namespace kdtree
 {
-
-  typedef size_t axis_t;
-  const axis_t INVALID_AXIS = SIZE_MAX;
-  
   /**
    * 
    */
   class node
   {
     public:
-    
-      static const size_t INVALID_IDX = SIZE_MAX;
     
       node() : axis_(INVALID_AXIS), idx_(INVALID_IDX), left_(INVALID_IDX), right_(INVALID_IDX)
       {
@@ -91,7 +85,10 @@ namespace kdtree
        
        size_t splitTree(std::vector<size_t>::iterator start, std::vector<size_t>::iterator end);
        std::pair<axis_t,std::vector<size_t>::iterator> find_split(std::vector<size_t>::iterator start, std::vector<size_t>::iterator end);
-       
+       void getNearestBounded(const std::vector<T> &target, const std::vector<T> &min_range, const std::vector<T> &max_range, size_t root, T& closest_norm, size_t& closest);
+       void getNearestBoundedLeft(const std::vector<T> &target, const std::vector<T> &min_range, const std::vector<T> &max_range, size_t root, T& closest_norm, size_t& closest);
+       void getNearestBoundedRight(const std::vector<T> &target, const std::vector<T> &min_range, const std::vector<T> &max_range, size_t root, T& closest_norm, size_t& closest);
+              
     private:
     
       template<class R>
