@@ -103,8 +103,8 @@ namespace kdtree
   template<class T>
   size_t kdTree<T>::getNearest(const std::vector<T> &target)
   {
-    std::vector<T> min_range(K_,std::numeric_limits<axis_t>::lowest());
-    std::vector<T> max_range(K_,std::numeric_limits<axis_t>::max());
+    std::vector<T> min_range(K_,std::numeric_limits<T>::lowest());
+    std::vector<T> max_range(K_,std::numeric_limits<T>::max());
     
     T closest_norm = std::numeric_limits<T>::max();
     size_t closest = INVALID_IDX;
